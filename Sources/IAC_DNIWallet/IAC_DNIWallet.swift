@@ -48,12 +48,15 @@ public class DNIWalletIACClient: IACClient {
     }
 }
 
-// Extension to run a DNI Wallet process (using organizationID and processID)
+// Extension to run a DNI Wallet process (using organizationID, processID and optional externalID)
 public extension DNIWalletIACClient {
-    func runProcess(organizationID: String, processID: String, params: [String:String] = [:], handler: IACResultHandler? = nil) {
+    func runProcess(organizationID: String, processID: String, externalID: String? = nil, params: [String:String] = [:], handler: IACResultHandler? = nil) {
         var params = params
         params["cid"] = organizationID
         params["pid"] = processID
+        if let externalID {
+            params["eid"] = externalID
+        }
         do {
             if let handler = handler {
                 try performAction("runProcess", parameters: params) { handler($0) }
