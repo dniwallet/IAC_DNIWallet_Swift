@@ -14,7 +14,7 @@ From anywhere in your app you can call DNI Wallet on the device with the followi
 ```swift
 import IAC_DNIWallet
 
-DNIWalletIACClient().runProcess(organizationID: organizationID, processID: processID, externalID: externalID)
+DNIWalletIACClient().runProcess(organizationID: organizationID, processID: processID, externalID: externalID, dni: dni)
 ```
 
 ### Receive callbacks from DNI Wallet
@@ -28,6 +28,7 @@ DNIWalletIACClient().runProcess(
     organizationID: organizationID, 
     processID: processID, 
     externalID: externalID, 
+    dni: dni, 
     parameters: ["param1": "value1", "param2": "value2"],
     handler: { result in 
         switch result {
