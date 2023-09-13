@@ -26,7 +26,7 @@ public extension String {
 public extension UIViewController {
     
     func Alert (Title: String, Message: String){
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: Title.localized(), message: Message.localized(), preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: nil)) // retrybtn))
         self.present(alert, animated: true, completion: nil)
     }
