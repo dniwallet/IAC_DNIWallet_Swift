@@ -32,7 +32,7 @@ public extension UIViewController {
     }
     
     func AskInstall (Title: String, Message: String){
-        let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: Title.localized(), message: Message.localized(), preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Install".localized(), style: .default, handler: { _ in
             UIApplication.shared.open(URL(string:"https://apps.apple.com/es/app/dni-wallet/id1645500619")!,options: [:], completionHandler: {_ in })
         }))
