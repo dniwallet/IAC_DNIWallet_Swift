@@ -9,20 +9,34 @@
 import UIKit
 import SystemConfiguration
 
+public extension String {
+    func localized() -> String {
+        let language = Locale.preferredLanguages.first
+        
+        if let path = Bundle.main.path(forResource: language, ofType: "lproj"), let bundle = Bundle(path: path) {
+            let localizedString = NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
+            return localizedString
+        } else {
+            let defaultString = NSLocalizedString(self, comment: "")
+            return defaultString
+        }
+    }
+}
+
 public extension UIViewController {
     
     func Alert (Title: String, Message: String){
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil)) // retrybtn))
+        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default, handler: nil)) // retrybtn))
         self.present(alert, animated: true, completion: nil)
     }
     
     func AskInstall (Title: String, Message: String){
         let alert = UIAlertController(title: Title, message: Message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Instalar", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Install".localized(), style: .default, handler: { _ in
             UIApplication.shared.open(URL(string:"https://apps.apple.com/es/app/dni-wallet/id1645500619")!,options: [:], completionHandler: {_ in })
         }))
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
